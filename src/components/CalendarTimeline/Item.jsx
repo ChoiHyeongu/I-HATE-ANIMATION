@@ -1,44 +1,63 @@
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { Image, StyleSheet, Text, View } from 'react-native';
 
 const Item = (props) => {
-  const { title, timestamp } = props;
-  const date = new Date(timestamp * 1000);
-  const days = ['일요일', '월요일', '화요일', '수요일', '목요일', '금요일', '토요일', '일요일'];
-  
+  const { title, inbound, outbound, image } = props;
+
+  const isInbound = inbound;
+  const bound = isInbound ? inbound : outbound;
+  const boundStyle = isInbound ? styles.inbound : styles.outbound;
+
+  const numberFormatter = (price) => {
+    const result = String(price).replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+    const prefix = isInbound ? '+' : '-';
+    return `${prefix}${result}원`;
+  };
+
   return (
     <View style={styles.container}>
-      <View style={styles.header}>
-        <Text style={styles.day}>{days[date.getDay()]}</Text>
-        <Text style={styles.date}>{`${date.getFullYear()}.${date.getMonth() + 1}.${date.getDate()}`}</Text>
+      <View style={styles.content}>
+        <Image style={styles.icon} source={image} />
+        <View>
+          <Text style={styles.title}>{title}</Text>
+          <Text style={[styles.price, boundStyle]}>
+            {numberFormatter(bound)}
+          </Text>
+        </View>
       </View>
-      <Text style={styles.title}>{title}</Text>
     </View>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
+    paddingVertical: 20,
     paddingHorizontal: 16,
-    paddingVertical: 12,
-    borderBottomWidth: 0.5,
-    borderBottomColor: 'grey',
   },
-  header: {
+  content: {
     flexDirection: 'row',
-    alignItems: 'center',
-    marginBottom: 4,
-  },
-  day: {
-    fontWeight: 'bold',
-    fontSize: 14,
-    marginRight: 3,
-  },
-  date: {
-    fontSize: 12,
   },
   title: {
-    fontSize: 16,
+    fontSize: 12,
+    lineHeight: 18,
+    color: '#949191',
+    marginBottom: 1,
+  },
+  icon: {
+    width: 40,
+    height: 40,
+    marginRight: 12,
+  },
+  price: {
+    fontSize: 17,
+    lineHeight: 22,
+    fontWeight: '500',
+  },
+  inbound: {
+    color: '#0068ff',
+  },
+  outbound: {
+    color: '#4d5358',
   },
 });
 
