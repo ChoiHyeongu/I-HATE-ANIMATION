@@ -10,13 +10,12 @@ const styles = StyleSheet.create({
 
 class Heart extends React.Component {
   render() {
-
     const heart = require('./ic_favorite.png');
     console.log(this.props.color);
     return (
       <Image
         source={heart}
-        style={[styles.heart, {tintColor: '#3CAEA3'}]}
+        style={[styles.heart, { tintColor: '#3CAEA3' }]}
       />
     );
   }

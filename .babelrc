@@ -1,0 +1,38 @@
+{
+  "presets": [
+    "module:metro-react-native-babel-preset"
+  ],
+  "plugins": [
+    [
+      "module-resolver",
+      {
+        "root": [
+          "./src/"
+        ],
+        "extensions": [
+          ".js",
+          ".ios.js",
+          ".android.js",
+          ".ts",
+          ".android.ts",
+          ".ios.ts",
+          ".tsx"
+        ],
+        "alias": {
+          "test": "./test",
+          "underscore": "lodash"
+        }
+      }
+    ],
+    [
+      "@babel/plugin-transform-flow-strip-types"
+    ]
+  ],
+  "env": {
+    "production": {
+      "plugins": [
+        "transform-remove-console"
+      ]
+    }
+  }
+}
