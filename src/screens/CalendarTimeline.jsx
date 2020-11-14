@@ -6,7 +6,7 @@ import {
   Text,
   View,
 } from 'react-native';
-import { Item } from 'components/CalendarTimeline';
+import { Item, RowCalendar } from 'components/CalendarTimeline';
 import {
   bc,
   coffeeplz,
@@ -141,6 +141,7 @@ const CalendarTimeline = () => {
         onViewableItemsChanged={onViewRef.current}
         renderItem={({ item }) => <Item {...item} />}
       />
+      <RowCalendar />
     </View>
   );
 };
@@ -169,7 +170,7 @@ const styles = StyleSheet.create({
     fontSize: 20,
     lineHeight: 26,
     fontWeight: '700',
-    color: '#dde1e6',
+    color: '#c1c7cd',
   },
 });
 
